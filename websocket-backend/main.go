@@ -42,7 +42,7 @@ func getTask(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 		
-		// this string is printed as a response
+		// this string is printed as a response in the frontend
 		response := "Received task_id: " + taskRequest.TaskID
 		if err := conn.WriteMessage(websocket.TextMessage, []byte(response)); err != nil {
 			log.Println("write:", err)
@@ -52,6 +52,7 @@ func getTask(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	// /get_task endpoint
 	http.HandleFunc("/get_task", getTask)
 	log.Println("Server started on :8080")
 	err := http.ListenAndServe(":8080", nil)
